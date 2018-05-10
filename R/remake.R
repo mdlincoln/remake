@@ -78,9 +78,9 @@ read_remake_file <- function(filename, seen=character(0)) {
   }
 
   ## TODO: Sort out the logic here:
-  if (dirname(filename) != "." && dirname(filename) != getwd()) {
-    stop("Logic around paths in out-of-directory remake files not decided")
-  }
+  # if (dirname(filename) != "." && dirname(filename) != getwd()) {
+  #   stop("Logic around paths in out-of-directory remake files not decided")
+  # }
 
   dat <- yaml_read(filename)
   warn_unknown(filename, dat,
@@ -132,9 +132,9 @@ read_remake_file <- function(filename, seen=character(0)) {
     ## relative to the main remakefile.  Possibly support a
     ## include-and-chdir approach too, where rules are rewritten to
     ## support relative paths, but that's going be hairy.
-    if (any(dirname(dat$include) != ".")) {
-      stop("All included remakefiles must be in the current directory")
-    }
+    # if (any(dirname(dat$include) != ".")) {
+    #   stop("All included remakefiles must be in the current directory")
+    # }
     for (f in dat$include) {
       dat_sub <- read_remake_file(f, c(seen, filename))
       dat$packages <- unique(c(dat$packages, dat_sub$packages))
